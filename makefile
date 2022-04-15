@@ -1,12 +1,9 @@
-SRC_FILES =./ src / main.cpp./ src / task.cpp./ src /
-               todo.cpp
+SRC_FILES= ./src/main.cpp ./src/task.cpp ./src/todo.cpp
 
-                   build : clean compile
+build: clean compile
 
-                               compile : g++ -
-           Wall - std = c++ 20 - g $(SRC_FILES) -
-                        o./ out /
-                            todo
+compile: 
+	g++ -Wall -std=c++20 -g $(SRC_FILES) -o ./out/todopp
 
-                                clean
-    : rm - rf./ out/*
+clean: 
+	rm -rf ./out/*
