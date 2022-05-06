@@ -7,3 +7,6 @@ compile:
 
 clean: 
 	rm -rf ./out/*
+
+format:
+	clang-format -style=google -i --verbose ./src/*

@@ -7,18 +7,13 @@
 using namespace std;
 
 int main(int argc, const char** argv) {
-  // TODO: save
-
-  todo todo("test");
+  string path = getenv("HOME");
+  path += "/.todopp";
+  todo todo(path);
   todo.load();
-  // debug
-  todo.add(task("kevin", false));
-  todo.add(task("ist", true));
-  todo.add(task("ein", false));
-  todo.add(task("kek", true));
 
   // usage message
-  string usage_msg =
+  const string USAGE_MSG =
       "Usage: t1 [operator] [task names/numbers]\n\n"
       "Operators:\n"
       "   list			print all tasks of the t1 list.\n"
@@ -32,13 +27,13 @@ int main(int argc, const char** argv) {
       "   help			print this message.";
 
   if (argc <= 1) {
-    cout << usage_msg << endl;
+    cout << USAGE_MSG << endl;
     exit(EXIT_FAILURE);
   }
 
   string action(argv[1]);
 
-  if (action == "list") {
+  if (action == "list" || action == "ls") {
     todo.print();
   } else if (action == "add") {
     for (int i = 2; i < argc; ++i) todo.add(task(argv[i], false));
@@ -55,13 +50,11 @@ int main(int argc, const char** argv) {
   } else if (action == "clear") {
     todo.clear();
   } else if (action == "help") {
-    cout << usage_msg << endl;
+    cout << USAGE_MSG << endl;
   } else {
-    cout << usage_msg << endl;
+    cout << USAGE_MSG << endl;
   }
 
-  // debug
-  todo.print();
-
+  todo.save();
   return 0;
 }

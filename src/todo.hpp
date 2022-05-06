@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -7,6 +8,7 @@
 
 struct todo {
   const std::string path;
+  std::fstream file;
   std::vector<task> list;
 
   todo(const std::string p) : path(p) {}

@@ -8,9 +8,38 @@ void addVectors(vector<task>& v1, vector<task>& v2) {
   for (task t : v2) v1.push_back(t);
 }
 
-void todo::load() {}
+void todo::load() {
+  file.open(path, ios::in);
+  if (!file) {
+    cerr << "Error while opening file" << endl;
+    exit(EXIT_FAILURE);
+  }
+  string line;
+  while (getline(file, line)) {
+    bool done = false;
+    if (line[0] == '-') {
+      done = true;
+      line = line.substr(1);
+    }
+    add(task(line, done));
+  }
+  file.close();
+}
 
-void todo::save() {}
+void todo::save() {
+  file.open(path, ios::out);
+  if (!file) {
+    cerr << "Error while opening file" << endl;
+    exit(EXIT_FAILURE);
+  }
+  for (task t : list) {
+    string prefix = "";
+    if (t.done) prefix = "-";
+    file << prefix << t.name << endl;
+    ;
+  }
+  file.close();
+}
 
 void todo::print() {
   for (long unsigned int i = 0; i < list.size(); ++i) {
@@ -18,10 +47,7 @@ void todo::print() {
   }
 }
 
-void todo::add(task t) {
-  list.push_back(t);
-  save();
-}
+void todo::add(task t) { list.push_back(t); }
 
 void todo::remove(vector<long unsigned int>& pos) {
   for (long unsigned int p : pos) {
@@ -38,7 +64,6 @@ void todo::remove(vector<long unsigned int>& pos) {
     if (!t.remove) tmp.push_back(t);
   clear();
   addVectors(list, tmp);
-  save();
 }
 
 void todo::done(vector<long unsigned int>& pos) {
@@ -51,7 +76,6 @@ void todo::done(vector<long unsigned int>& pos) {
     }
     list[p].done = true;
   }
-  save();
 }
 
 void todo::sort() {
@@ -66,10 +90,6 @@ void todo::sort() {
   clear();
   addVectors(list, tmp);
   addVectors(list, done);
-  save();
 }
 
-void todo::clear() {
-  list.clear();
-  save();
-}
+void todo::clear() { list.clear(); }
