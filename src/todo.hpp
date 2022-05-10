@@ -7,14 +7,13 @@
 #include "task.hpp"
 
 struct todo {
-  const std::string path;
+  std::string path;
   std::fstream file;
+
   std::vector<task> list;
 
-  todo(const std::string p) : path(p) {}
-
-  void load();
-  void save();
+  todo();
+  ~todo();
 
   void print();
   void add(task t);

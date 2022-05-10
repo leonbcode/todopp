@@ -3,31 +3,15 @@
 
 #include "task.hpp"
 #include "todo.hpp"
+#include "util.hpp"
 
 using namespace std;
 
 int main(int argc, const char** argv) {
-  string path = getenv("HOME");
-  path += "/.todopp";
-  todo todo(path);
-  todo.load();
-
-  // usage message
-  const string USAGE_MSG =
-      "Usage: t1 [operator] [task names/numbers]\n\n"
-      "Operators:\n"
-      "   list			print all tasks of the t1 list.\n"
-      "   add [task names]	add tasks with the given names to the list.\n"
-      "   rm [task numbers]	remove tasks with the given number from the "
-      "list.\n"
-      "   done [task numbers]	mark tasks with the specified numbers as "
-      "completed.\n"
-      "   sort			move done tasks to the end of the list.\n"
-      "   clear 		remove all tasks from the list.\n"
-      "   help			print this message.";
+  todo todo;
 
   if (argc <= 1) {
-    cout << USAGE_MSG << endl;
+    cout << USAGE << endl;
     exit(EXIT_FAILURE);
   }
 
@@ -50,11 +34,10 @@ int main(int argc, const char** argv) {
   } else if (action == "clear") {
     todo.clear();
   } else if (action == "help") {
-    cout << USAGE_MSG << endl;
+    cout << USAGE << endl;
   } else {
-    cout << USAGE_MSG << endl;
+    cout << USAGE << endl;
   }
 
-  todo.save();
   return 0;
 }

@@ -1,11 +1,10 @@
 #include "task.hpp"
 
-static const std::string strike = "\e[9m";
-static const std::string reset = "\e[0m";
+#include "util.hpp"
 
 std::string task::getText() {
   if (done)
-    return strike + name + reset;
+    return STRIKE + name + RESET;
   else
     return name;
 }
