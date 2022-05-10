@@ -1,18 +1,14 @@
 #include "todo.hpp"
 
+#include <algorithm>
 #include <iostream>
 
 #include "util.hpp"
 
 using namespace std;
 
-void addVectors(vector<task>& v1, vector<task>& v2) {
-  for (task t : v2) v1.push_back(t);
-}
-
 todo::todo() {
-  path = getenv("HOME");
-  path += "/.todopp";
+  path = string(getenv("HOME")) + string("/.todopp");
 
   file.open(path, ios::in);
   if (!file) {
@@ -56,7 +52,7 @@ void todo::print() {
 
 void todo::add(task t) { list.push_back(t); }
 
-void todo::remove(vector<long unsigned int>& pos) {
+void todo::remove(const vector<long unsigned int>& pos) {
   for (long unsigned int p : pos) {
     if (p >= list.size()) {
       cerr << ERROR_ARGUMENT << endl;
@@ -64,14 +60,10 @@ void todo::remove(vector<long unsigned int>& pos) {
     }
     list[p].remove = true;
   }
-  vector<task> tmp;
-  for (task t : list)
-    if (!t.remove) tmp.push_back(t);
-  clear();
-  addVectors(list, tmp);
+  erase_if(list, [](task t) { return t.remove; });
 }
 
-void todo::done(vector<long unsigned int>& pos) {
+void todo::done(const vector<long unsigned int>& pos) {
   for (long unsigned int p : pos) {
     if (p >= list.size()) {
       cerr << ERROR_ARGUMENT << endl;
@@ -82,17 +74,8 @@ void todo::done(vector<long unsigned int>& pos) {
 }
 
 void todo::sort() {
-  vector<task> tmp;
-  vector<task> done;
-  for (task t : list) {
-    if (t.done)
-      done.push_back(t);
-    else
-      tmp.push_back(t);
-  }
-  clear();
-  addVectors(list, tmp);
-  addVectors(list, done);
+  std::sort(list.begin(), list.end(),
+            [](task l, task r) { return !l.done && r.done; });
 }
 
 void todo::clear() { list.clear(); }
