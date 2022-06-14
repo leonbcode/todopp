@@ -22,11 +22,11 @@ int main(int argc, const char** argv) {
   } else if (action == "add") {
     for (int i = 2; i < argc; ++i) todo.add(task(argv[i], false));
   } else if (action == "rm") {
-    vector<long unsigned int> pos;
+    vector<unsigned long int> pos;
     for (int i = 2; i < argc; ++i) pos.push_back(atoi(argv[i]) - 1);
     todo.remove(pos);
   } else if (action == "done") {
-    vector<long unsigned int> pos;
+    vector<unsigned long int> pos;
     for (int i = 2; i < argc; ++i) pos.push_back(atoi(argv[i]) - 1);
     todo.done(pos);
   } else if (action == "sort") {
@@ -39,5 +39,5 @@ int main(int argc, const char** argv) {
     cout << USAGE << endl;
   }
 
-  return 0;
+  return EXIT_SUCCESS;
 }

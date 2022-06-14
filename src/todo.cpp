@@ -8,7 +8,7 @@
 using namespace std;
 
 todo::todo() {
-  path = string(getenv("HOME")) + string("/.todopp");
+  path = string(getenv(HOMEPATH)) + string("/.todopp");
 
   file.open(path, ios::in);
   if (!file) {
@@ -18,12 +18,12 @@ todo::todo() {
 
   string line;
   while (getline(file, line)) {
-    bool done = false;
+    bool taskDone = false;
     if (line[0] == DONE_PREFIX) {
-      done = true;
+      taskDone = true;
       line = line.substr(1);
     }
-    add(task(line, done));
+    add(task(line, taskDone));
   }
   file.close();
 }
@@ -45,15 +45,15 @@ todo::~todo() {
 }
 
 void todo::print() {
-  for (long unsigned int i = 0; i < list.size(); ++i) {
+  for (unsigned long int i = 0; i < list.size(); ++i) {
     cout << BOLD << (i + 1) << ". " << RESET << list[i].getText() << endl;
   }
 }
 
 void todo::add(task t) { list.push_back(t); }
 
-void todo::remove(const vector<long unsigned int>& pos) {
-  for (long unsigned int p : pos) {
+void todo::remove(const vector<unsigned long int>& pos) {
+  for (unsigned long int p : pos) {
     if (p >= list.size()) {
       cerr << ERROR_ARGUMENT << endl;
       exit(EXIT_FAILURE);
@@ -63,8 +63,8 @@ void todo::remove(const vector<long unsigned int>& pos) {
   erase_if(list, [](task t) { return t.remove; });
 }
 
-void todo::done(const vector<long unsigned int>& pos) {
-  for (long unsigned int p : pos) {
+void todo::done(const vector<unsigned long int>& pos) {
+  for (unsigned long int p : pos) {
     if (p >= list.size()) {
       cerr << ERROR_ARGUMENT << endl;
       exit(EXIT_FAILURE);

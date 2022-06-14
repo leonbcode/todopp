@@ -2,11 +2,17 @@
 
 #include <string>
 
-static const std::string RESET = "\e[0m";
-static const std::string BOLD = "\e[1m";
-static const std::string STRIKE = "\e[9m";
+#ifdef _WIN32
+#define HOMEPATH "HOMEPATH"
+#elif __unix__
+#define HOMEPATH "HOME"
+#endif
 
-static const char DONE_PREFIX = '-';
+#define RESET "\e[0m"
+#define BOLD "\e[1m"
+#define STRIKE "\e[9m"
+
+#define DONE_PREFIX '-'
 
 static const std::string USAGE =
     "Usage: t1 [operator] [task names/numbers]\n\n"
