@@ -10,7 +10,7 @@ using namespace std;
 todo::todo() {
   path = string(getenv(HOMEPATH)) + string("/.todopp");
 
-  file.open(path, ios::in);
+  file.open(path, fstream::in | fstream::app);
   if (!file) {
     cerr << ERROR_FILE << endl;
     exit(EXIT_FAILURE);
