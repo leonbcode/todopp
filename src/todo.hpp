@@ -16,9 +16,9 @@ struct todo {
   ~todo();
 
   void print();
-  void add(task t);
-  void remove(const std::vector<unsigned long int>& pos);
-  void done(const std::vector<unsigned long int>& pos);
+  void add(const task &t);
+  void remove(const std::vector<unsigned long int> &pos);
+  void done(const std::vector<unsigned long int> &pos);
   void sort();
   void clear();
 };
