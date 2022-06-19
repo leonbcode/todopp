@@ -3,7 +3,7 @@
 #include <string>
 
 #ifdef _WIN32
-#define HOMEPATH "HOMEPATH"
+#define HOMEPATH "USERPROFILE"
 #elif __unix__
 #define HOMEPATH "HOME"
 #endif
@@ -15,9 +15,9 @@
 #define DONE_PREFIX '-'
 
 static const std::string USAGE =
-    "Usage: t1 [operator] [task names/numbers]\n\n"
+    "Usage: todopp [operator] [task names/numbers]\n\n"
     "Operators:\n"
-    "   list      print all tasks of the t1 list.\n"
+    "   list      print all tasks of the todo list.\n"
     "   add [task names]  add tasks with the given names to the list.\n"
     "   rm [task numbers] remove tasks with the given number from the list.\n"
     "   done [task numbers] mark tasks with the specified numbers as "
