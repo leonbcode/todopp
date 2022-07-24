@@ -11,12 +11,31 @@
 </div>
 
 ## Installation
+
+### Linux
 ```bash
 # Clone this repository
 $ git clone https://github.com/leonbcode/todopp.git
 
-# WIP
+# Open the project directory
+$ cd ./todopp/
+
+# Create a build directory
+$ mkdir build
+
+# Open the build directory
+$ cd ./build/
+
+# Initialize the CMake project
+$ cmake ../
+
+# Build the project with CMake
+$ cmake --build .
+
+# Install the project with CMake
+$ sudo cmake --install .
 ```
+### Windows
 
 ## Usage
 
