@@ -12,7 +12,8 @@
 
 ## Installation
 
-### Linux
+### build from source
+
 ```bash
 # Clone this repository
 $ git clone https://github.com/leonbcode/todopp.git
@@ -32,10 +33,11 @@ $ cmake ../
 # Build the project with CMake
 $ cmake --build .
 
-# Install the project with CMake
+# (optional) Install the project with CMake
 $ sudo cmake --install .
 ```
-### Windows
+
+Note: *If you are on Windows, you might want to add the installation directory to the PATH environment variable.*
 
 ## Usage
 
@@ -44,12 +46,12 @@ $ sudo cmake --install .
 $ todopp add "example task"
 ``` 
 
-| Operator          | Description                                 | Alias |
-|-------------------|---------------------------------------------|-------|
-| list              | List all tasks.                             | ls    |
-| add `task names`  | Add one or multiple tasks.                  |       |
+| Operator          | Description                                  | Alias |
+|-------------------|----------------------------------------------|-------|
+| list              | List all tasks.                              | ls    |
+| add `task names`  | Add one or multiple tasks.                   |       |
 | remove `task ids` | Remove the specified tasks.                  | rm    |
 | done `task ids`   | Mark the specified tasks as done.            |       |
-| sort              | Move all done tasks to the end of the list. |       |
-| clear             | Remove all tasks.                           |       |
-| help              | Print the help message.                     | ?     |
+| sort              | Move all done tasks to the end of the list.  |       |
+| clear             | Remove all tasks.                            |       |
+| help              | Print the help message.                      | ?     |
