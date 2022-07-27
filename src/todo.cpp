@@ -19,11 +19,8 @@ todo::todo() {
   string line;
   while (getline(file, line)) {
     bool taskDone = false;
-    if (line[0] == DONE_PREFIX) {
-      taskDone = true;
-      line = line.substr(1);
-    }
-    add(task(line, taskDone));
+    if (line.rfind(DONE_PREFIX, 0) == 0) taskDone = true;
+    add(task(line.substr(6), taskDone));
   }
   file.close();
 }
@@ -35,11 +32,11 @@ todo::~todo() {
     exit(EXIT_FAILURE);
   }
 
-  for (const task &t : list) {
+  for (const task &t: list) {
     if (t.done)
       file << DONE_PREFIX << t.name << endl;
     else
-      file << t.name << endl;
+      file << UNFINISHED_PREFIX << t.name << endl;
   }
   file.close();
 }
@@ -53,7 +50,7 @@ void todo::print() {
 void todo::add(const task &t) { list.push_back(t); }
 
 void todo::remove(const vector<unsigned long int> &pos) {
-  for (unsigned long int p : pos) {
+  for (unsigned long int p: pos) {
     if (p >= list.size()) {
       cerr << ERROR_ARGUMENT << endl;
       exit(EXIT_FAILURE);
@@ -64,7 +61,7 @@ void todo::remove(const vector<unsigned long int> &pos) {
 }
 
 void todo::done(const vector<unsigned long int> &pos) {
-  for (unsigned long int p : pos) {
+  for (unsigned long int p: pos) {
     if (p >= list.size()) {
       cerr << ERROR_ARGUMENT << endl;
       exit(EXIT_FAILURE);

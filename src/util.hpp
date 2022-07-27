@@ -12,7 +12,8 @@
 #define BOLD "\e[1m"
 #define STRIKE "\e[9m"
 
-#define DONE_PREFIX '-'
+#define DONE_PREFIX "- [x] "
+#define UNFINISHED_PREFIX "- [ ] "
 
 static const std::string USAGE =
     "Usage: todopp [operator] [task names/numbers]\n\n"
