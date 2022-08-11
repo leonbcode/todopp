@@ -21,7 +21,7 @@ int main(int argc, const char **argv) {
     todo.print();
   } else if (action == "add") {
     for (int i = 2; i < argc; ++i) todo.add(task(argv[i], false));
-  } else if (action == "rm") {
+  } else if (action == "remove" || action == "rm") {
     vector<unsigned long int> pos;
     for (int i = 2; i < argc; ++i) pos.push_back(atoi(argv[i]) - 1);
     todo.remove(pos);
@@ -33,8 +33,6 @@ int main(int argc, const char **argv) {
     todo.sort();
   } else if (action == "clear") {
     todo.clear();
-  } else if (action == "help") {
-    cout << USAGE << endl;
   } else {
     cout << USAGE << endl;
   }
